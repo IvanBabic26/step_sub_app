@@ -15,6 +15,8 @@ In your terminal, navigate to your folder with the step_sub app and write the fo
     
 flutter run -d windows
 
+if an error occurs, make sure you have Developer Mode on in the System Settings
+
 ## Web:
 to see the available devices for web, in the terminal write: flutter devices
 to run on a specific browser (i.e. Chrome) on localhost run the following command: flutter run -d chrome
