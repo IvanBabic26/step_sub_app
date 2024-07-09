@@ -63,19 +63,25 @@ class PaymentPlanAdapter extends TypeAdapter<PaymentPlan> {
       name: fields[0] as String?,
       price: fields[1] as int?,
       paymentPlanType: fields[2] as PaymentPlanType,
+      id: fields[3] as String?,
+      isSelected: fields[4] == null ? false : fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, PaymentPlan obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.price)
       ..writeByte(2)
-      ..write(obj.paymentPlanType);
+      ..write(obj.paymentPlanType)
+      ..writeByte(3)
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.isSelected);
   }
 
   @override

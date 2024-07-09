@@ -39,10 +39,28 @@ class PaymentPlan extends HiveObject {
   @HiveField(2)
   final PaymentPlanType paymentPlanType;
 
-  PaymentPlan({required this.name, required this.price, this.paymentPlanType = PaymentPlanType.monthly});
+  @HiveField(3)
+  final String? id;
 
-  PaymentPlan copyWith({String? name,int? price, PaymentPlanType? paymentPlanType}) {
-    return PaymentPlan(name: name ?? this.name,price: price ?? this.price, paymentPlanType: paymentPlanType ?? this.paymentPlanType);
+  @HiveField(4,defaultValue: false)
+  final bool isSelected;
+
+  PaymentPlan({
+    required this.name,
+    required this.price,
+    this.paymentPlanType = PaymentPlanType.monthly,
+    this.id,
+    this.isSelected = false,
+  });
+
+  PaymentPlan copyWith({String? name, int? price, PaymentPlanType? paymentPlanType, String? id, bool? isSelected}) {
+    return PaymentPlan(
+      name: name ?? this.name,
+      price: price ?? this.price,
+      paymentPlanType: paymentPlanType ?? this.paymentPlanType,
+      id: id ?? this.id,
+      isSelected: isSelected ?? this.isSelected,
+    );
   }
 }
 

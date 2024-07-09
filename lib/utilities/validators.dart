@@ -1,32 +1,38 @@
+import 'package:flutter/cupertino.dart';
+import 'package:step_sub/commons/strings.dart';
+
 class TextFieldValidators {
-  String? validateName(String value, bool firstName) {
+  String? validateName(String value, bool firstName, BuildContext context) {
+    final strings = LocalizedStrings(context);
     if (value.isEmpty) {
-      return 'Please enter your ${firstName ? 'first name' : 'last name'}.';
+      return firstName ? strings.pleaseEnterYourFirstName : strings.pleaseEnterYourLastName;
     }
     return null;
   }
 
-  String? validateMobile(String value) {
+  String? validateMobile(String value, BuildContext context) {
+    final strings = LocalizedStrings(context);
     if (value.isEmpty) {
-      return 'Please enter a phone number';
+      return strings.pleaseEnterAPhoneNumber;
     } else if (value.startsWith('+')) {
       if (value.length != 12) {
-        return 'Please enter a 12 digit number with area code';
+        return strings.pleaseEnterA12DigitNumberWithAreaCode;
       }
     } else if (value.length != 10) {
-      return 'Please enter a 10 digit number';
+      return strings.pleaseEnterA10DigitNumber;
     }
     return null;
   }
 
-  String? validateEmail(String email) {
+  String? validateEmail(String email, BuildContext context) {
+    final strings = LocalizedStrings(context);
     String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
     RegExp regex = RegExp(emailPattern);
 
     if (email.isEmpty) {
-      return 'Please enter an email.';
+      return strings.pleaseEnterAnEmail;
     } else if (!regex.hasMatch(email)) {
-      return 'Please enter a valid email.';
+      return strings.pleaseEnterAValidEmail;
     }
     return null;
   }

@@ -25,7 +25,7 @@ Future<void> initDependencies() async {
 
   await Hive.openBox<User>('${boxName}user');
   await Hive.openBox<PaymentPlan>('${boxName}paymentPlan');
-  await Hive.openBox<List<PaymentPlan>>('${boxName}paymentPlanList');
+  await Hive.openBox<List<String>>('${boxName}keysBox');
 
   PlatformConfig.boxName = boxName;
 }

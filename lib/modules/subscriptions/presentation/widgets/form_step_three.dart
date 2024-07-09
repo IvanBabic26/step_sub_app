@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:step_sub/design/step_sub_text_styles.dart';
 import 'package:step_sub/modules/subscriptions/domain/subs_model.dart';
 import 'package:step_sub/modules/subscriptions/presentation/subscription_card.dart';
+import 'package:step_sub/utilities/extensions.dart';
 import 'package:step_sub/utilities/utils.dart';
 
 class FormStepThree extends StatelessWidget {
@@ -27,8 +27,8 @@ class FormStepThree extends StatelessWidget {
               (e) => Text(
                 e,
                 style: isMobileScreenSize(context)
-                    ? StepSubTextStyles.titleTextStyle
-                    : StepSubTextStyles.primaryDesktopTextStyle,
+                    ? context.textStyle?.headlineMedium
+                    : context.textStyle?.titleLarge,
               ),
             ),
             const SizedBox(height: 16),

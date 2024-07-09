@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:step_sub/design/step_sub_colors.dart';
-import 'package:step_sub/design/step_sub_text_styles.dart';
+import 'package:step_sub/commons/strings.dart';
+import 'package:step_sub/utilities/extensions.dart';
 
 class FormActionButtons extends StatelessWidget {
   const FormActionButtons({
@@ -18,6 +18,7 @@ class FormActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = LocalizedStrings(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -25,77 +26,41 @@ class FormActionButtons extends StatelessWidget {
         children: [
           if (stepIndex == 1 || stepIndex == 2)
             TextButton(
-              style: ButtonStyle(
-                overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                  (Set<WidgetState> states) {
-                    if (states.contains(WidgetState.hovered)) {
-                      return StepSubColors.lightBlue;
-                    }
-                    return null;
-                  },
-                ),
-                backgroundColor: WidgetStateProperty.resolveWith(
-                  (states) {
-                    return StepSubColors.primaryColor;
-                  },
-                ),
-                shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                ),
-              ),
               onPressed: onBackButtonPress,
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(
                     Icons.arrow_back,
                     size: 16,
-                    color: StepSubColors.white,
+                    color: context.colorTheme.white,
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Text(
-                    'Previous',
-                    style: StepSubTextStyles.buttonTextStyle,
+                    strings.previous,
+                    style: context.textStyle?.labelMedium,
                   ),
                 ],
               ),
             ),
           const SizedBox(width: 8),
           TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return StepSubColors.lightBlue;
-                  }
-                  return null;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith(
-                (states) {
-                  return StepSubColors.primaryColor;
-                },
-              ),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              ),
-            ),
             onPressed: onNextButtonPress,
             child: Row(
               children: [
                 Text(
                   isFormCompleted
-                      ? 'Close'
+                      ? strings.close
                       : stepIndex == 2
-                          ? 'Confirm'
-                          : 'Next',
-                  style: StepSubTextStyles.buttonTextStyle,
+                          ? strings.confirm
+                          : strings.next,
+                  style: context.textStyle?.labelMedium,
                 ),
                 if (!(stepIndex == 2) && !isFormCompleted) ...[
                   const SizedBox(width: 4),
-                  const Icon(
+                  Icon(
                     Icons.arrow_forward,
                     size: 16,
-                    color: StepSubColors.white,
+                    color: context.colorTheme.white,
                   ),
                 ]
               ],

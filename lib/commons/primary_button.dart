@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:step_sub/design/step_sub_colors.dart';
-import 'package:step_sub/design/step_sub_text_styles.dart';
-
+import 'package:step_sub/utilities/extensions.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
@@ -27,14 +25,15 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(8.0)),
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
-        ),
-        backgroundColor: WidgetStateProperty.resolveWith((states) {
-          return backgroundColor ?? StepSubColors.whiteBackground;
-        }),
-        shadowColor: WidgetStateProperty.all<Color>(showShadows ? StepSubColors.black : StepSubColors.transparent),
+        backgroundColor: backgroundColor != null
+            ? WidgetStateProperty.all<Color>(backgroundColor!)
+            : context.elevatedButtonStyle?.backgroundColor,
+        foregroundColor: buttonTitleColor != null
+            ? WidgetStateProperty.all<Color>(buttonTitleColor!)
+            : context.elevatedButtonStyle?.foregroundColor,
+        shadowColor: showShadows
+            ? WidgetStateProperty.all<Color>(context.colorTheme.black)
+            : context.elevatedButtonStyle?.shadowColor,
         elevation: WidgetStateProperty.all<double>(showShadows ? 4.0 : 0),
       ),
       onPressed: onPressed,
@@ -47,12 +46,7 @@ class PrimaryButton extends StatelessWidget {
               children: [
                 leadingIcon, // Left Icon
                 const SizedBox(width: 8.0),
-                Text(
-                  buttonTitle,
-                  style: StepSubTextStyles.primaryTextStyle.copyWith(
-                    color: buttonTitleColor ?? StepSubColors.white,
-                  ),
-                ), // Centered Text
+                Text(buttonTitle), // Centered Text
               ],
             ),
           ),

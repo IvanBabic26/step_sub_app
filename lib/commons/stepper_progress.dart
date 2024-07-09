@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:step_sub/design/step_sub_colors.dart';
-import 'package:step_sub/design/step_sub_text_styles.dart';
+import 'package:step_sub/utilities/extensions.dart';
 
 class StepperProgress extends StatelessWidget {
   const StepperProgress({
@@ -21,50 +20,66 @@ class StepperProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isMobileScreenSize
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildStep(0, true, isStepCompleted: isStepOneCompleted),
-              Expanded(
-                child: Container(
-                  height: 2,
-                  color: stepValue == 1 || stepValue == 2 || stepValue == 3
-                      ? StepSubColors.primaryColor
-                      : StepSubColors.grey,
+        ? Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildStep(
+                  context,
+                  0,
+                  true,
+                  isStepCompleted: isStepOneCompleted,
                 ),
-              ),
-              _buildStep(
-                1,
-                stepValue == 1 || stepValue == 2,
-                isStepCompleted: isStepTwoCompleted,
-              ),
-              Expanded(
-                child: Container(
-                  height: 2,
-                  color: stepValue == 2 || stepValue == 3 ? StepSubColors.primaryColor : StepSubColors.grey,
+                Expanded(
+                  child: Container(
+                    height: 2,
+                    color: stepValue == 1 || stepValue == 2 || stepValue == 3
+                        ? context.colorTheme.primaryColor
+                        : context.colorTheme.grey,
+                  ),
                 ),
-              ),
-              _buildStep(
-                2,
-                stepValue == 2,
-                isStepCompleted: isFormCompleted,
-              ),
-            ],
-          )
+                _buildStep(
+                  context,
+                  1,
+                  stepValue == 1 || stepValue == 2,
+                  isStepCompleted: isStepTwoCompleted,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 2,
+                    color: stepValue == 2 || stepValue == 3 ? context.colorTheme.primaryColor : context.colorTheme.grey,
+                  ),
+                ),
+                _buildStep(
+                  context,
+                  2,
+                  stepValue == 2,
+                  isStepCompleted: isFormCompleted,
+                ),
+              ],
+            ),
+        )
         : SizedBox(
             width: 200,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildStep(0, true, isStepCompleted: isStepOneCompleted),
+                _buildStep(
+                  context,
+                  0,
+                  true,
+                  isStepCompleted: isStepOneCompleted,
+                ),
                 Container(
                   width: 2,
                   height: 100,
                   color: stepValue == 1 || stepValue == 2 || stepValue == 3
-                      ? StepSubColors.primaryColor
-                      : StepSubColors.grey,
+                      ? context.colorTheme.primaryColor
+                      : context.colorTheme.grey,
                 ),
                 _buildStep(
+                  context,
                   1,
                   stepValue == 1 || stepValue == 2,
                   isStepCompleted: isStepTwoCompleted,
@@ -72,9 +87,10 @@ class StepperProgress extends StatelessWidget {
                 Container(
                   width: 2,
                   height: 100,
-                  color: stepValue == 2 || stepValue == 3 ? StepSubColors.primaryColor : StepSubColors.grey,
+                  color: stepValue == 2 || stepValue == 3 ? context.colorTheme.primaryColor : context.colorTheme.grey,
                 ),
                 _buildStep(
+                  context,
                   2,
                   stepValue == 2,
                   isStepCompleted: isFormCompleted,
@@ -84,20 +100,20 @@ class StepperProgress extends StatelessWidget {
           );
   }
 
-  Widget _buildStep(int stepIndex, bool isActive, {bool isStepCompleted = false}) {
+  Widget _buildStep(BuildContext context, int stepIndex, bool isActive, {bool isStepCompleted = false}) {
     return Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive || isStepCompleted ? StepSubColors.primaryColor : StepSubColors.grey,
+        color: isActive || isStepCompleted ? context.colorTheme.primaryColor : context.colorTheme.grey,
       ),
       child: Center(
         child: isStepCompleted
-            ? const Icon(Icons.check, size: 18, color: StepSubColors.white)
+            ? Icon(Icons.check, size: 18, color: context.colorTheme.white)
             : Text(
                 '${stepIndex + 1}',
-                style: StepSubTextStyles.primaryTextStyle,
+                style: context.textStyle?.titleMedium,
               ),
       ),
     );

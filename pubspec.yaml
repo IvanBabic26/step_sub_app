@@ -43,6 +43,8 @@ dependencies:
   path_provider: ^2.1.3
 
 dev_dependencies:
+  flutter_localizations:
+    sdk: flutter
   hive_generator: ^1.1.0
   build_runner: ^2.0.0
   flutter_test:
@@ -61,7 +63,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  # Adds code generation (synthetic package) support
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:step_sub/commons/background_image.dart';
 import 'package:step_sub/commons/primary_button.dart';
+import 'package:step_sub/commons/strings.dart';
 import 'package:step_sub/design/images.dart';
-import 'package:step_sub/design/step_sub_colors.dart';
 import 'package:step_sub/modules/subscriptions/presentation/subscription_screen.dart';
+import 'package:step_sub/utilities/extensions.dart';
 
 class StepSubApp extends StatelessWidget {
   const StepSubApp({super.key});
@@ -23,19 +24,20 @@ class StepSubApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = LocalizedStrings(context);
     return Scaffold(
       body: Stack(
         children: [
-          Container(color: StepSubColors.pinkRed),
-          Container(color: StepSubColors.black.withOpacity(0.5)),
+          Container(color: context.colorTheme.pinkRed),
+          Container(color: context.colorTheme.black.withOpacity(0.5)),
           const BackgroundImage(),
-          Container(color: StepSubColors.lightBlue.withOpacity(0.55)),
+          Container(color: context.colorTheme.lightBlue.withOpacity(0.55)),
           Container(
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  StepSubColors.primaryColor.withOpacity(0.5),
-                  StepSubColors.primaryColor.withOpacity(0.0),
+                  context.colorTheme.primaryColor.withOpacity(0.5),
+                  context.colorTheme.primaryColor.withOpacity(0.0),
                 ],
                 center: Alignment.topLeft,
                 radius: 1,
@@ -46,8 +48,8 @@ class StepSubApp extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: RadialGradient(
                 colors: [
-                  StepSubColors.pinkRed.withOpacity(0.5),
-                  StepSubColors.pinkRed.withOpacity(0.01),
+                  context.colorTheme.pinkRed.withOpacity(0.5),
+                  context.colorTheme.pinkRed.withOpacity(0.01),
                 ],
                 center: Alignment.bottomRight,
                 radius: 1,
@@ -70,18 +72,18 @@ class StepSubApp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     PrimaryButton(
-                      buttonTitle: 'Proceedix Enterprise',
-                      leadingIcon: const Icon(Icons.cloud, color: StepSubColors.white),
-                      trailingIcon: const Icon(Icons.arrow_right_outlined, color: StepSubColors.white),
+                      buttonTitle: strings.proceedixEnterprise,
+                      leadingIcon: Icon(Icons.cloud, color: context.colorTheme.white),
+                      trailingIcon: Icon(Icons.arrow_right_outlined, color: context.colorTheme.white),
                       onPressed: () => onButtonPress(context),
-                      backgroundColor: StepSubColors.primaryColor,
+                      backgroundColor: context.colorTheme.primaryColor,
                     ),
                     const SizedBox(height: 16),
                     PrimaryButton(
-                      buttonTitle: 'Log in',
+                      buttonTitle: strings.login,
                       onPressed: () => onButtonPress(context),
-                      leadingIcon: const Icon(Icons.person_sharp, color: StepSubColors.primaryColor),
-                      buttonTitleColor: StepSubColors.primaryColor,
+                      leadingIcon: Icon(Icons.person_sharp, color: context.colorTheme.primaryColor),
+                      buttonTitleColor: context.colorTheme.primaryColor,
                       showShadows: true,
                     ),
                   ],
