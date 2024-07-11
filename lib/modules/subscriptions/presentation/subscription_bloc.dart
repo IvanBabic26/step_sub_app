@@ -15,7 +15,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   Box<PaymentPlan>? paymentPlanBox;
   Box<List<String>>? keysBox;
 
-  SubscriptionBloc() : super(const InitialDataStata()) {
+  SubscriptionBloc() : super(const InitialDataState()) {
     on<InitialEvent>(_init);
     on<SelectPlanTypeEvent>(selectPlan);
     on<NextStep>(nextStep);

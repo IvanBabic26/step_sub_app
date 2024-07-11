@@ -104,7 +104,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: BlocBuilder<SubscriptionBloc, SubscriptionState>(
                       builder: (context, state) {
                         final bloc = context.read<SubscriptionBloc>();
-                        if (state is InitialData) {
+                        if (state is InitialDataState) {
                           return const Center(child: CircularProgressIndicator());
                         } else {
                           return Row(
@@ -178,6 +178,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                         child: Text(
                                           state.step.getTitle(context),
                                           textAlign: TextAlign.center,
+                                          style: context.textStyle?.headlineMedium?.copyWith(color: context.colorTheme.black),
                                         ),
                                       ),
                                     ),

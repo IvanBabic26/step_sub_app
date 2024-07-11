@@ -28,8 +28,8 @@ abstract class SubscriptionState extends Equatable {
   List<Object?> get props => [step, paymentPlans, user];
 }
 
-class InitialDataStata extends SubscriptionState {
-  const InitialData({
+class InitialDataState extends SubscriptionState {
+  const InitialDataState({
     super.step,
     super.user,
     super.paymentPlans,
